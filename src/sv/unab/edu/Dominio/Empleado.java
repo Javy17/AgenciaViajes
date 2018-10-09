@@ -3,12 +3,17 @@ package sv.unab.edu.Dominio;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class Cliente {
+public class Empleado
+{
     private Long id;
+    private String seguro;
+    private String afp;
     private Persona datosPersonales;
 
-    public Cliente() {
+    public Empleado() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -16,6 +21,22 @@ public class Cliente {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getSeguro() {
+        return seguro;
+    }
+
+    public void setSeguro(String seguro) {
+        this.seguro = seguro;
+    }
+
+    public String getAfp() {
+        return afp;
+    }
+
+    public void setAfp(String afp) {
+        this.afp = afp;
     }
 
     public Persona getDatosPersonales() {
@@ -31,9 +52,9 @@ public class Cliente {
         if (this == o) return true;
         if (!(o instanceof Cliente)) return false;
 
-        Cliente cliente = (Cliente) o;
+        Empleado empleado = (Empleado) o;
 
-        return id.equals(cliente.id);
+        return id.equals(empleado.id);
     }
 
     @Override

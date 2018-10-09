@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="org.andromda.thirdparty.jaxb2_commons:commons-lang-plugin:2.2" type="repository">
+    <properties maven-id="org.andromda.thirdparty.jaxb2_commons:commons-lang-plugin:2.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/andromda/thirdparty/jaxb2_commons/commons-lang-plugin/2.2/commons-lang-plugin-2.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.10/jaxb-impl-2.1.10.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-xjc/2.1.10/jaxb-xjc-2.1.10.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.5/commons-lang-2.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

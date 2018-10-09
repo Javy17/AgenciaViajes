@@ -1,23 +1,24 @@
-
 package sv.unab.edu.Presentacion;
+
+//import com.toedter.calendar.JDateChooser;
+
 import com.toedter.calendar.JDateChooser;
+
 import org.apache.commons.lang.StringUtils;
-import sv.unab.edu.Dominio.Cliente;
-import sv.unab.edu.Infraestructura.logCliente;
+import sv.unab.edu.Dominio.Empleado;
+import sv.unab.edu.Infraestructura.logEmpleado;
 import sv.unab.edu.Negocios.Util.Filtro;
 import sv.unab.edu.Presentacion.Util.ButtonColumn;
 import sv.unab.edu.Presentacion.Util.DefaultTableModelImpl;
 import sv.unab.edu.Presentacion.Util.JButtonCellRenderer;
 import sv.unab.edu.Presentacion.Util.Utilidades;
 
-//import org.apache.commons.lang.StringUtils;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
@@ -26,15 +27,16 @@ import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.*;
 
 import static java.util.logging.Level.INFO;
 
-public class formCliente extends JInternalFrame
+public class formEmpleado extends JInternalFrame
 {
 
     private static final Logger LOG = Logger.getLogger("sv.unab.edu.agenciaviajes");
 
-    private JPanel pnlRoot;
+    public JPanel pnlRoot;
     private JComboBox cboParametro;
     private JPanel pnlCamposBusquedaTXT;
     private JLabel lblParametro;
@@ -44,54 +46,27 @@ public class formCliente extends JInternalFrame
     private JDateChooser dcInicio;
     private JDateChooser dcFinal;
     private JPanel pnlDatos;
-    private JTable tblClientes;
+    private JTable tblEmpleados;
     private JButton btnAñadir;
     private JList lstFiltros;
 
-    private logCliente logCliente;
-    private List<Cliente> clientes;
+    private logEmpleado logEmpleado;
+    private List<Empleado> empleados;
     private List<Filtro> filtros;
 
-    public formCliente()
+    public formEmpleado()
     {
-        LOG.log(INFO, "[formCliente][INIT]");
+        LOG.log(INFO, "[formEmpleado][INIT]");
         this.setContentPane(pnlRoot);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(Utilidades.getSize());
         this.pack();
-        //setLocationRelativeTo(null);
-        txtBusqueda.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
+        //this.setLocationRelativeTo(null);
 
-            }
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(KeyEvent.VK_ENTER == e.getKeyCode()){
-                    String value = txtBusqueda.getText();
-                    txtBusqueda.setText(null);
-                    if(StringUtils.isNotBlank(value) && filtros.stream().noneMatch(f -> StringUtils.equalsIgnoreCase(f.getNombre(), cboParametro.getSelectedItem().toString().toLowerCase()))){
-                        Filtro filtro = new Filtro();
-                        filtro.setNombre(cboParametro.getSelectedItem().toString().toLowerCase());
-                        filtro.setValor(value);
-                        filtro.setTipo('S');
-                        filtro.setOperador(!filtros.isEmpty() ? "AND" : null);
-                        filtros.add(filtro);
-                        actualizarListaFiltros();
-                    } else {
-                        JOptionPane.showMessageDialog(e.getComponent(), "El filtro ya esta agregado a la lista o esta vacio");
-                    }
-                }
-            }
-        });
-        cboParametro.addItemListener(evt -> {
-            LOG.log(Level.INFO, "[formCliente][cboParametroChangeItem] -> {0}", new Object[]{evt.getItem().toString()});
+        cboParametro.addItemListener(evt ->
+        {
+            LOG.log(Level.INFO, "[formEmpleado][cboParametroChangeItem] -> {0}", new Object[]{evt.getItem().toString()});
             if (StringUtils.containsIgnoreCase(evt.getItem().toString(), "Fecha")) {
                 pnlCamposFecha.setVisible(true);
                 pnlCamposBusquedaTXT.setVisible(false);
@@ -107,29 +82,44 @@ public class formCliente extends JInternalFrame
         });
         btnAñadir.addActionListener(evt ->
         {
-            formClienteGestion frm = new formClienteGestion(null);
+            formGestionEmpleado frm = new formGestionEmpleado(null);
             frm.pack();
             frm.setVisible(true);
-            clientes = logCliente.obtenerListado(null);
-            cargarDatos(clientes);
+            empleados = logEmpleado.obtenerListado(null);
+            cargarDatos(empleados);
         });
-        logCliente = new logCliente();
-        clientes = new ArrayList<>();
+        logEmpleado = new logEmpleado();
+        empleados = new ArrayList<>();
         filtros = new ArrayList<>();
-        clientes = logCliente.obtenerListado(null);
-        cargarDatos(clientes);
-        /*btnAñadir.addActionListener(new ActionListener()
+        empleados = logEmpleado.obtenerListado(null);
+        cargarDatos(empleados);
+
+        txtBusqueda.addKeyListener(new KeyAdapter()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void keyReleased(KeyEvent e)
             {
-                formClienteGestion frm = new formClienteGestion();
-                frm.pack();
-                frm.setVisible(true);
-                clientes = logCliente.obtenerListado(null);
-                cargarDatos(clientes);
+                if(KeyEvent.VK_ENTER == e.getKeyCode())
+                {
+                    String value = txtBusqueda.getText();
+                    txtBusqueda.setText(null);
+                    if(StringUtils.isNotBlank(value) && filtros.stream().noneMatch(f -> StringUtils.equalsIgnoreCase(f.getNombre(), cboParametro.getSelectedItem().toString().toLowerCase())))
+                    {
+                        Filtro filtro = new Filtro();
+                        filtro.setNombre(cboParametro.getSelectedItem().toString().toLowerCase());
+                        filtro.setValor(value);
+                        filtro.setTipo('S');
+                        filtro.setOperador(!filtros.isEmpty() ? "AND" : null);
+                        filtros.add(filtro);
+                        actualizarListaFiltros();
+                    }
+                    else
+                        {
+                        JOptionPane.showMessageDialog(e.getComponent(), "El filtro ya esta agregado a la lista o esta vacio");
+                    }
+                }
             }
-        });*/
+        });
     }
 
     private void createUIComponents() {
@@ -141,13 +131,12 @@ public class formCliente extends JInternalFrame
         dcInicio.setDate(new Date());
         dcFinal.setDate(new Date());
         dcInicio.addPropertyChangeListener(evt -> {
-            if (StringUtils.equals("date", evt.getPropertyName()))
-            {
+            if (StringUtils.equals("date", evt.getPropertyName())) {
                 buscarFecha(dcInicio.getDate(), dcFinal.getDate());
             }
         });
         dcFinal.addPropertyChangeListener(evt -> {
-            if (StringUtils.equals("date", evt.getPropertyName())) {
+            if (org.apache.commons.lang.StringUtils.equals("date", evt.getPropertyName())) {
                 if (dcInicio.getDate() != null && filtros.stream().noneMatch(f -> StringUtils.containsIgnoreCase(f.getNombre(), "fecha"))) {
                     buscarFecha(dcInicio.getDate(), dcFinal.getDate());
                 } else {
@@ -155,33 +144,44 @@ public class formCliente extends JInternalFrame
                 }
             }
         });
-        tblClientes = new JTable();
-        tblClientes.setFillsViewportHeight(true);
-        ((DefaultTableCellRenderer) tblClientes.getDefaultRenderer(Object.class)).setHorizontalAlignment(JLabel.CENTER);
+        tblEmpleados = new JTable();
+        tblEmpleados.setFillsViewportHeight(true);
+        ((DefaultTableCellRenderer) tblEmpleados.getDefaultRenderer(Object.class)).setHorizontalAlignment(JLabel.CENTER);
         lstFiltros = new JList<String>();
-        lstFiltros.addListSelectionListener(e -> {
-            try {
+        lstFiltros.addListSelectionListener(e ->
+        {
+            try
+            {
                 int itemSelected = lstFiltros.getSelectedIndex();
-                if(itemSelected > -1 && filtros != null && !filtros.isEmpty()) {
-                    if (StringUtils.containsIgnoreCase(filtros.get(itemSelected).getNombre(), "fecha")) {
+                if(itemSelected > -1 && filtros != null && !filtros.isEmpty())
+                {
+                    if (StringUtils.containsIgnoreCase(filtros.get(itemSelected).getNombre(), "fecha"))
+                    {
                         filtros.removeIf(f -> f.getTipo() == 'D');
-                    } else {
+                    }
+                    else
+                        {
                         filtros.remove(itemSelected);
                     }
                     actualizarListaFiltros();
                 }
-            } catch (Exception ex) {
-                LOG.log(Level.SEVERE, "[formCliente][createUIComponents][Excepcion] -> ", ex);
+            }
+            catch (Exception ex)
+            {
+                LOG.log(Level.SEVERE, "[formEmpleado][createUIComponents][Excepcion] -> ", ex);
             }
         });
     }
 
-    private void buscarFecha(Date inicio, Date fin) {
-        if(inicio != null && fin != null) {
+    private void buscarFecha(Date inicio, Date fin)
+    {
+        if(inicio != null && fin != null)
+        {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String inicioStr = df.format(inicio);
             String finalStr = df.format(fin);
-            if (filtros.stream().noneMatch(f -> StringUtils.containsIgnoreCase(f.getNombre(), "fecha"))) {
+            if (filtros.stream().noneMatch(f -> StringUtils.containsIgnoreCase(f.getNombre(), "fecha")))
+            {
                 Filtro filtro = new Filtro();
                 filtro.setNombre("fechaNacimiento");
                 filtro.setValor(inicioStr);
@@ -195,41 +195,55 @@ public class formCliente extends JInternalFrame
                 filtro.setOperador(!filtros.isEmpty() ? "AND" : null);
                 filtros.add(filtro);
                 actualizarListaFiltros();
-            } else {
+            }
+            else
+                {
                 JOptionPane.showMessageDialog(this, "El filtro ya esta agregado a la lista o esta vacio");
             }
         }
     }
 
-    private void cargarDatos(List<Cliente> clienteList) {
-        Utilidades.reiniciarJTable(tblClientes);
-        DefaultTableModel modelo = new DefaultTableModelImpl(Arrays.asList(4, 5));
+    private void cargarDatos(List<Empleado> empleadoList)
+    {
+        Utilidades.reiniciarJTable(tblEmpleados);
+        DefaultTableModel modelo = new DefaultTableModelImpl(Arrays.asList(6, 7));
         modelo.addColumn("DUI");
         modelo.addColumn("Nombre");
         modelo.addColumn("Telefono");
         modelo.addColumn("Nacimiento");
+        modelo.addColumn("Seguro");
+        modelo.addColumn("AFP");
         modelo.addColumn("Editar");
         modelo.addColumn("Eliminar");
-        clienteList.stream().forEach(cl -> {
-            modelo.addRow(new Object[]{
+        empleadoList.stream().forEach(cl ->
+        {
+            modelo.addRow(new Object[]
+                    {
                     cl.getDatosPersonales().getDui(),
                     cl,
                     cl.getDatosPersonales().getTelefono(),
                     cl.getDatosPersonales().getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yy")),
+                    cl.getSeguro(),
+                    cl.getAfp(),
                     "Editar",
                     "Eliminar"
             });
         });
-        tblClientes.setModel(modelo);
-        tblClientes.setDefaultRenderer(Object.class, new JButtonCellRenderer());
-        Utilidades.setAdjustColumnSize(tblClientes);
-        Action editarAccion = new AbstractAction() {
+        tblEmpleados.setModel(modelo);
+        tblEmpleados.setDefaultRenderer(Object.class, new JButtonCellRenderer());
+        Utilidades.setAdjustColumnSize(tblEmpleados);
+        //Edicion
+        Action editarAccion = new AbstractAction()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 JTable tbl = (JTable) e.getSource();
-                if (tbl.getSelectedRow() != -1) {
-                    Cliente cliente = (Cliente) tbl.getValueAt(tbl.getSelectedRow(), 1);
-                    onEditar(cliente);
+                if (tbl.getSelectedRow() != -1)
+                {
+                    Empleado empleado = (Empleado) tbl.getValueAt(tbl.getSelectedRow(), 1);
+
+                    onEditar(empleado);
                 }
             }
         };
@@ -238,14 +252,15 @@ public class formCliente extends JInternalFrame
             public void actionPerformed(ActionEvent e) {
                 JTable tbl = (JTable) e.getSource();
                 int fila = Integer.valueOf(e.getActionCommand());
-                Cliente cliente = (Cliente) tbl.getValueAt(fila, 1);
-                onEliminar(cliente);
+                Empleado empleado = (Empleado) tbl.getValueAt(fila, 1);
+                onEliminar(empleado);
             }
         };
-        ButtonColumn buttonColumn = new ButtonColumn(tblClientes, editarAccion, 4);
-        buttonColumn = new ButtonColumn(tblClientes, eliminarAccion, 5);
+        ButtonColumn buttonColumn = new ButtonColumn(tblEmpleados, editarAccion, 6);
+        buttonColumn = new ButtonColumn(tblEmpleados, eliminarAccion, 7);
     }
 
+    //metodo actualizar
     private void actualizarListaFiltros(){
         lstFiltros.removeAll();
         if(!filtros.isEmpty()){
@@ -267,32 +282,25 @@ public class formCliente extends JInternalFrame
                 return str.toString();
             }).ifPresent(f -> modeloLista.addElement(f));
             lstFiltros.setModel(modeloLista);
-            clientes = logCliente.obtenerListado(filtros);
-            cargarDatos(clientes);
+            empleados = logEmpleado.obtenerListado(filtros);
+            cargarDatos(empleados);
         }
     }
 
-    private void onEditar(Cliente cliente) {
-        LOG.log(INFO, "[formCliente][onEditar] -> {0}", new Object[]{cliente});
-        formClienteGestion frm = new formClienteGestion(cliente);
+    private void onEditar(Empleado empleado) {
+        LOG.log(INFO, "[formEmpleado][onEditar] -> {0}", new Object[]{empleado});
+        formGestionEmpleado frm = new formGestionEmpleado(empleado);
         frm.pack();
         frm.setVisible(true);
-        clientes = logCliente.obtenerListado(null);
-        cargarDatos(clientes);
+        empleados = logEmpleado.obtenerListado(null);
+        cargarDatos(empleados);
     }
 
-    private void onEliminar(Cliente cliente) {
-        LOG.log(INFO, "[formCliente][onEliminar] -> {0}", new Object[]{cliente});
-        logCliente.eliminarCliente(cliente);
-        clientes = logCliente.obtenerListado(null);
-        cargarDatos(clientes);
+    private void onEliminar(Empleado empleado) {
+        LOG.log(INFO, "[formEmpleado][onEliminar] -> {0}", new Object[]{empleado});
+        logEmpleado.eliminarEmpleado(empleado);
+        empleados = logEmpleado.obtenerListado(null);
+        cargarDatos(empleados);
     }
 
-    /*private void actionPerformed(ActionEvent evt) {
-        formClienteGestion frm = new formClienteGestion();
-        frm.pack();
-        frm.setVisible(true);
-        clientes = logCliente.obtenerListado(null);
-        cargarDatos(clientes);
-    }*/
 }

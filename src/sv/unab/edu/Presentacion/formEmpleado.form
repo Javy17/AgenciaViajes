@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="sv.unab.edu.Presentacion.formCliente">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="sv.unab.edu.Presentacion.formEmpleado">
   <grid id="27dc6" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="d81bc" binding="pnlRoot" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="3305b" binding="pnlRoot" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -16,15 +16,15 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="cc6b8" binding="pnlBusqueda" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="6da1d" binding="pnlBusqueda" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none" title="Busqueda"/>
             <children>
-              <grid id="35ee2" binding="pnlCamposBusquedaTXT" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="8cbc0" binding="pnlCamposBusquedaTXT" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -34,7 +34,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="389e5" class="javax.swing.JLabel" binding="lblParametro">
+                  <component id="fab62" class="javax.swing.JLabel" binding="lblParametro">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -42,7 +42,7 @@
                       <text value="lblParametro"/>
                     </properties>
                   </component>
-                  <component id="25610" class="javax.swing.JTextField" binding="txtBusqueda">
+                  <component id="eea3b" class="javax.swing.JTextField" binding="txtBusqueda">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -52,7 +52,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="d3294" binding="pnlCamposFecha" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="a403" binding="pnlCamposFecha" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -62,7 +62,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="c6b75" class="javax.swing.JLabel">
+                  <component id="cb4fa" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -70,7 +70,7 @@
                       <text value="Fecha Inicio:"/>
                     </properties>
                   </component>
-                  <component id="ab7b4" class="javax.swing.JLabel">
+                  <component id="3b44a" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -78,19 +78,19 @@
                       <text value="Fecha Final:"/>
                     </properties>
                   </component>
-                  <component id="d8bf2" class="com.toedter.calendar.JDateChooser" binding="dcInicio" custom-create="true">
+                  <component id="8cd1d" class="com.toedter.calendar.JDateChooser" binding="dcInicio" custom-create="true">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
-                  <component id="48aaf" class="com.toedter.calendar.JDateChooser" binding="dcFinal" custom-create="true">
+                  <component id="9d1c5" class="com.toedter.calendar.JDateChooser" binding="dcFinal" custom-create="true">
                     <constraints>
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </component>
                 </children>
               </grid>
-              <grid id="d62da" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="700d1" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -98,7 +98,7 @@
                 <properties/>
                 <border type="none" title="Filros ingresados"/>
                 <children>
-                  <component id="10f9f" class="javax.swing.JList" binding="lstFiltros" custom-create="true">
+                  <component id="dd5f" class="javax.swing.JList" binding="lstFiltros" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="50"/>
@@ -110,7 +110,7 @@
                   </component>
                 </children>
               </grid>
-              <component id="1961e" class="javax.swing.JLabel">
+              <component id="a296b" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -118,7 +118,7 @@
                   <text value="Parametro de Busqueda:"/>
                 </properties>
               </component>
-              <component id="c2f4c" class="javax.swing.JComboBox" binding="cboParametro">
+              <component id="9d577" class="javax.swing.JComboBox" binding="cboParametro">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -134,22 +134,22 @@
               </component>
             </children>
           </grid>
-          <grid id="89982" binding="pnlDatos" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="a4475" binding="pnlDatos" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none" title="Listado de datos"/>
             <children>
-              <scrollpane id="b11b7">
+              <scrollpane id="23b91">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="297ab" class="javax.swing.JTable" binding="tblClientes" custom-create="true">
+                  <component id="49ca5" class="javax.swing.JTable" binding="tblEmpleados" custom-create="true">
                     <constraints/>
                     <properties/>
                   </component>
@@ -157,19 +157,14 @@
               </scrollpane>
             </children>
           </grid>
-          <component id="8de56" class="javax.swing.JButton" binding="btnAñadir">
+          <component id="eba07" class="javax.swing.JButton" binding="btnAñadir">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Añadir"/>
             </properties>
           </component>
-          <vspacer id="98b2f">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
         </children>
       </grid>
     </children>
